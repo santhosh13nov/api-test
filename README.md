@@ -13,10 +13,6 @@ npm test
 ```
 
 # test assertions
-![Alt text](docs/img_1.png)
 
 # Check HTML reports
 > Once test run check ``newman`` folder
-![Alt text](docs/img.png)
-![Alt text](docs/img_2.png)
-![Alt text](docs/img_3.png)
