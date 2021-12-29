@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "74c9607a-6e25-4008-b854-cd06ce48118b",
+		"name": "Global QA API TEST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "check launches if limit is 10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"var jsonData = pm.response.json();",
+							"var launchesPastSize = jsonData.data.launchesPast.length;",
+							"",
+							"pm.test(\"Validate launchesPast are greater than 0\", function () {",
+							"    pm.expect(launchesPastSize).gt(0)",
+							"    });",
+							"",
+							"    pm.test(\"Validate launchesPast are 10\", function () {",
+							"    pm.expect(launchesPastSize).to.eq(10)",
+							"    });",
+							"",
+							"pm.test(\"Check mission_name is not empty\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].mission_name).not.null;",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Check ships size are greater than 0\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].ships.length).gte(0)",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Validate first_stage\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].rocket.first_stage).not.null",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Validate second_stage\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].rocket.second_stage).not.null",
+							"  }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  launchesPast(limit: 10) {\n    mission_name\n    launch_date_local\n    launch_site {\n      site_name_long\n    }\n    links {\n      article_link\n      video_link\n    }\n    rocket {\n      rocket_name\n      first_stage {\n        cores {\n          flight\n          core {\n            reuse_count\n            status\n          }\n        }\n      }\n      second_stage {\n        payloads {\n          payload_type\n          payload_mass_kg\n          payload_mass_lbs\n        }\n      }\n    }\n    ships {\n      name\n      home_port\n      image\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://api.spacex.land/graphql/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spacex",
+						"land"
+					],
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check launches if limit is 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"var jsonData = pm.response.json();",
+							"var launchesPastSize = jsonData.data.launchesPast.length;",
+							"",
+							"pm.test(\"Validate launchesPast are greater than 0\", function () {",
+							"    pm.expect(launchesPastSize).gt(0)",
+							"    });",
+							"",
+							"    pm.test(\"Validate launchesPast are 2\", function () {",
+							"    pm.expect(launchesPastSize).to.eq(2)",
+							"    });",
+							"",
+							"pm.test(\"Check mission_name is not empty\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].mission_name).not.null;",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Check ships size are greater than 0\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].ships.length).gte(0)",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Validate first_stage\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].rocket.first_stage).not.null",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Validate second_stage\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].rocket.second_stage).not.null",
+							"  }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  launchesPast(limit: 2) {\n    mission_name\n    launch_date_local\n    launch_site {\n      site_name_long\n    }\n    links {\n      article_link\n      video_link\n    }\n    rocket {\n      rocket_name\n      first_stage {\n        cores {\n          flight\n          core {\n            reuse_count\n            status\n          }\n        }\n      }\n      second_stage {\n        payloads {\n          payload_type\n          payload_mass_kg\n          payload_mass_lbs\n        }\n      }\n    }\n    ships {\n      name\n      home_port\n      image\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://api.spacex.land/graphql/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spacex",
+						"land"
+					],
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check launches if offset is 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"var jsonData = pm.response.json();",
+							"var launchesPastSize = jsonData.data.launchesPast.length;",
+							"",
+							"pm.test(\"Validate launchesPast are greater than 0\", function () {",
+							"    pm.expect(launchesPastSize).gt(0)",
+							"    });",
+							"",
+							"    pm.test(\"Validate launchesPast size\", function () {",
+							"    pm.expect(launchesPastSize).to.gt(2)",
+							"    });",
+							"",
+							"pm.test(\"Check mission_name is not empty\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].mission_name).not.null;",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Check ships size are greater than 0\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].ships.length).gte(0)",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Validate first_stage\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].rocket.first_stage).not.null",
+							"  }",
+							"});",
+							"",
+							"pm.test(\"Validate second_stage\", function () {",
+							"  for(let i=0;i<launchesPastSize;i++){",
+							"       pm.expect(jsonData.data.launchesPast[i].rocket.second_stage).not.null",
+							"  }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "{\n  launchesPast(offset: 2) {\n    mission_name\n    launch_date_local\n    launch_site {\n      site_name_long\n    }\n    links {\n      article_link\n      video_link\n    }\n    rocket {\n      rocket_name\n      first_stage {\n        cores {\n          flight\n          core {\n            reuse_count\n            status\n          }\n        }\n      }\n      second_stage {\n        payloads {\n          payload_type\n          payload_mass_kg\n          payload_mass_lbs\n        }\n      }\n    }\n    ships {\n      name\n      home_port\n      image\n    }\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "https://api.spacex.land/graphql/",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spacex",
+						"land"
+					],
+					"path": [
+						"graphql",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

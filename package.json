@@ -1,0 +1,17 @@
+{
+  "name": "global-qa-api-tests",
+  "version": "1.0.0",
+  "main": "",
+  "scripts": {
+    "test": "newman run tests/Global-QA-API-TEST.postman_collection.json -r htmlextra --reporter-htmlextra-logs"
+  },
+  "author": {
+    "name":"vanitha"
+  },
+  "license": "ISC",
+  "description": "Global Radio QA API tests",
+  "dependencies": {
+    "newman": "^5.3.0",
+    "newman-reporter-htmlextra": "^1.22.3"
+  }
+}
